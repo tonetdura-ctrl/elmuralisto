@@ -1,0 +1,43 @@
+---
+import { faqs } from '../data/site';
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<section id="faq" class="py-24 sm:py-32">
+  <div class="container-x grid gap-12 lg:grid-cols-[1fr_1.6fr] lg:gap-24">
+    <div>
+      <span class="eyebrow">Preguntas frecuentes</span>
+      <h2 class="mt-5 text-4xl leading-tight font-medium sm:text-6xl">Todo lo que necesitas <em class="text-terracotta italic">saber</em></h2>
+      <p class="mt-6 text-ink-soft">
+        ¿Tienes otra duda? <a href="#contacto" class="font-semibold text-ink underline decoration-terracotta decoration-2 underline-offset-4">Escríbeme</a>.
+      </p>
+    </div>
+    <div class="divide-y divide-ink/10 border-y border-ink/10">
+      {
+        faqs.map((f) => (
+          <details name="faq" class="group py-2">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 font-display text-xl font-medium sm:text-2xl [&::-webkit-details-marker]:hidden">
+              {f.q}
+              <span class="grid size-10 shrink-0 place-items-center rounded-full border border-ink/15 transition duration-300 group-open:rotate-45 group-open:border-terracotta group-open:bg-terracotta group-open:text-cream">
+                <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M12 5v14M5 12h14" stroke-linecap="round" />
+                </svg>
+              </span>
+            </summary>
+            <p class="max-w-2xl pb-6 leading-relaxed text-ink-soft">{f.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+  <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
+</section>

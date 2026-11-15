@@ -1,0 +1,126 @@
+---
+import { Picture } from 'astro:assets';
+import floristeria from '../assets/murales/floristeria.png';
+import salonRetro from '../assets/murales/salon-retro.png';
+import heladeria from '../assets/murales/heladeria.png';
+
+const words = ['Floristerías', 'Restaurantes', 'Salones', 'Cafeterías', 'Dormitorios', 'Heladerías', 'Coctelerías', 'Oficinas', 'Fachadas'];
+---
+
+<section class="relative overflow-hidden pt-28 pb-16 sm:pt-36 lg:pb-24">
+  <!-- formas decorativas -->
+  <div aria-hidden="true" class="pointer-events-none absolute -top-24 -right-24 size-[28rem] rounded-full bg-blush/40 blur-3xl"></div>
+  <div aria-hidden="true" class="pointer-events-none absolute top-1/2 -left-32 size-[22rem] rounded-full bg-mustard/25 blur-3xl"></div>
+
+  <div class="container-x relative grid items-center gap-14 lg:grid-cols-12 lg:gap-10">
+    <div class="lg:col-span-5">
+      <span class="eyebrow">Murales pintados a mano</span>
+      <h1 class="mt-6 text-[clamp(2.75rem,7vw,5.5rem)] leading-[0.95] font-medium">
+        Paredes que cuentan <em class="font-normal text-terracotta italic">tu</em> historia.
+      </h1>
+      <p class="mt-7 max-w-md text-lg leading-relaxed text-ink-soft">
+        Diseño y pinto murales únicos para comercios y hogares. Ves el resultado en un boceto digital antes de
+        empezar, y yo me encargo del resto.
+      </p>
+      <div class="mt-10 flex flex-wrap gap-3">
+        <a href="#presupuesto" class="btn-accent">
+          Calcula tu presupuesto
+          <svg viewBox="0 0 20 20" class="size-4" fill="currentColor" aria-hidden="true"
+            ><path
+              fill-rule="evenodd"
+              d="M3 10a.75.75 0 0 1 .75-.75h10.64l-4.22-4.22a.75.75 0 1 1 1.06-1.06l5.5 5.5a.75.75 0 0 1 0 1.06l-5.5 5.5a.75.75 0 1 1-1.06-1.06l4.22-4.22H3.75A.75.75 0 0 1 3 10Z"
+              clip-rule="evenodd"></path></svg
+          >
+        </a>
+        <a href="#obras" class="btn-ghost">Ver obras</a>
+      </div>
+
+      <dl class="mt-12 grid max-w-md grid-cols-3 gap-4 border-t border-ink/10 pt-6 text-sm">
+        <div>
+          <dt class="text-ink-soft">Diseño</dt>
+          <dd class="mt-1 font-semibold">100% a medida</dd>
+        </div>
+        <div>
+          <dt class="text-ink-soft">Boceto</dt>
+          <dd class="mt-1 font-semibold">Antes de pintar</dd>
+        </div>
+        <div>
+          <dt class="text-ink-soft">Acabado</dt>
+          <dd class="mt-1 font-semibold">Barniz lavable</dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="relative lg:col-span-7">
+      <div class="relative aspect-[4/3] overflow-hidden rounded-[2rem] shadow-2xl shadow-ink/15 ring-1 ring-ink/5">
+        <Picture
+          src={floristeria}
+          formats={['avif', 'webp']}
+          fallbackFormat="jpg"
+          widths={[640, 960, 1448]}
+          sizes="(min-width: 1024px) 58vw, 100vw"
+          alt="Mural floral en una floristería con flores en terracota, rosa y salvia"
+          loading="eager"
+          fetchpriority="high"
+          class="size-full object-cover"
+          transition:name="mural-floristeria"
+        />
+      </div>
+
+      <div
+        class="absolute -bottom-10 -left-4 hidden w-[38%] overflow-hidden rounded-3xl border-[6px] border-cream shadow-xl shadow-ink/20 sm:block lg:-left-12"
+      >
+        <Picture
+          src={salonRetro}
+          formats={['avif', 'webp']}
+          fallbackFormat="jpg"
+          widths={[400, 640]}
+          sizes="25vw"
+          alt="Mural de flores retro en un salón"
+          class="aspect-[4/3] size-full object-cover"
+        />
+      </div>
+      <div
+        class="absolute -top-8 right-6 hidden w-[28%] rotate-3 overflow-hidden rounded-3xl border-[6px] border-cream shadow-xl shadow-ink/20 md:block"
+      >
+        <Picture
+          src={heladeria}
+          formats={['avif', 'webp']}
+          fallbackFormat="jpg"
+          widths={[320, 480]}
+          sizes="18vw"
+          alt="Mural pastel de helados en una heladería"
+          class="aspect-square size-full object-cover"
+        />
+      </div>
+
+      <div
+        class="absolute right-4 -bottom-6 flex items-center gap-3 rounded-full bg-paper/95 py-2.5 pr-5 pl-2.5 shadow-lg shadow-ink/10 backdrop-blur sm:right-8"
+      >
+        <span class="grid size-9 place-items-center rounded-full bg-sage text-cream">
+          <svg viewBox="0 0 24 24" class="size-4.5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"
+            ><path d="M18.4 2.6a2 2 0 0 1 2.8 2.8L11 15.6 7 17l1.4-4L18.4 2.6Z" stroke-linejoin="round"></path><path
+              d="M4 21c2-1 3-3 3-4"
+              stroke-linecap="round"></path></svg
+          >
+        </span>
+        <span class="text-sm font-semibold">Pintado a mano, pieza única</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="overflow-hidden border-y border-ink/10 bg-ink py-5 text-cream" aria-hidden="true">
+  <div class="marquee-track flex w-max gap-10 whitespace-nowrap">
+    {
+      [...words, ...words].map((w) => (
+        <span class="flex items-center gap-10 font-display text-2xl italic sm:text-3xl">
+          {w}
+          <svg viewBox="0 0 24 24" class="size-5 text-mustard" fill="currentColor">
+            <path d="M12 0c.6 6.4 5.6 11.4 12 12-6.4.6-11.4 5.6-12 12-.6-6.4-5.6-11.4-12-12C6.4 11.4 11.4 6.4 12 0Z" />
+          </svg>
+        </span>
+      ))
+    }
+  </div>
+</div>

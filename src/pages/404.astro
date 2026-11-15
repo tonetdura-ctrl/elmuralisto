@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+---
+
+<Base title="Página no encontrada">
+  <Header />
+  <main id="contenido" class="container-x grid min-h-dvh place-items-center py-32 text-center">
+    <div class="max-w-xl">
+      <p class="font-display text-[8rem] leading-none text-terracotta italic">404</p>
+      <h1 class="mt-4 text-4xl font-medium">Esta pared está en blanco</h1>
+      <p class="mt-4 text-ink-soft">La página que buscas no existe o se ha movido.</p>
+      <a href="/" class="btn-primary mt-10">Volver al inicio</a>
+    </div>
+  </main>
+</Base>

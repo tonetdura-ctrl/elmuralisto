@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+---
+
+<Base title="Gracias">
+  <Header />
+  <main id="contenido" class="container-x grid min-h-dvh place-items-center py-32 text-center">
+    <div class="max-w-xl">
+      <span class="mx-auto grid size-16 place-items-center rounded-full bg-sage text-cream">
+        <svg viewBox="0 0 24 24" class="size-8" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"
+          ><path d="m5 12 5 5L20 7" stroke-linecap="round" stroke-linejoin="round"></path></svg
+        >
+      </span>
+      <h1 class="mt-8 text-5xl font-medium sm:text-6xl">¡Gracias! <em class="text-terracotta italic">Recibido.</em></h1>
+      <p class="mt-6 text-lg text-ink-soft">
+        He recibido tu solicitud. Te escribiré en menos de 48 horas con una primera propuesta para tu pared.
+      </p>
+      <a href="/" class="btn-primary mt-10">Volver al inicio</a>
+    </div>
+  </main>
+</Base>

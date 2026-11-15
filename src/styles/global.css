@@ -1,0 +1,143 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/fraunces/full.css';
+@import '@fontsource-variable/manrope';
+
+@theme {
+  --font-display: 'Fraunces Variable', ui-serif, Georgia, serif;
+  --font-sans: 'Manrope Variable', ui-sans-serif, system-ui, sans-serif;
+
+  --color-cream: #f6efe4;
+  --color-paper: #fbf7f0;
+  --color-sand: #ead9c2;
+  --color-ink: #1e1b18;
+  --color-ink-soft: #5b534b;
+  --color-terracotta: #c8553d;
+  --color-terracotta-dark: #a8432e;
+  --color-sage: #7c8b6a;
+  --color-mustard: #e4b23a;
+  --color-blush: #e9a7a0;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-cream text-ink font-sans;
+  }
+  ::selection {
+    @apply bg-terracotta text-cream;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-terracotta);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-variation-settings: 'SOFT' 50, 'WONK' 0;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition duration-300 ease-out-expo;
+}
+@utility btn-primary {
+  @apply btn bg-ink text-cream hover:bg-terracotta;
+}
+@utility btn-accent {
+  @apply btn bg-terracotta text-cream hover:bg-terracotta-dark;
+}
+@utility btn-ghost {
+  @apply btn border border-ink/15 text-ink hover:border-ink hover:bg-ink hover:text-cream;
+}
+@utility eyebrow {
+  @apply inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] text-terracotta uppercase;
+  &::before {
+    content: '';
+    @apply h-px w-8 bg-current;
+  }
+}
+@utility container-x {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10;
+}
+@utility field {
+  @apply w-full rounded-2xl border border-ink/10 bg-paper px-4 py-3.5 text-ink placeholder:text-ink-soft/60 transition focus:border-terracotta focus:ring-4 focus:ring-terracotta/15 focus:outline-none;
+}
+@utility label {
+  @apply mb-2 block text-sm font-semibold text-ink;
+}
+
+/* Animaciones de entrada guiadas por scroll (CSS nativo, sin JS) */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 28%;
+    }
+  }
+}
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Marquesina */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  animation: marquee 40s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* Lightbox */
+dialog.lightbox::backdrop {
+  background: rgb(30 27 24 / 0.85);
+  backdrop-filter: blur(6px);
+}
+dialog.lightbox[open] {
+  animation: pop 0.4s var(--ease-out-expo);
+}
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+/* Grano sutil de papel */
+.grain::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}

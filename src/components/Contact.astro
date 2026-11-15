@@ -1,0 +1,181 @@
+---
+import { Picture } from 'astro:assets';
+import { site } from '../data/site';
+import cocteleria from '../assets/murales/cocteleria.png';
+
+const wa = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent('Hola, me gustaría pedir presupuesto para un mural.')}`;
+---
+
+<section id="contacto" class="relative overflow-hidden bg-ink py-24 text-cream sm:py-32">
+  <div class="absolute inset-0 opacity-25" aria-hidden="true">
+    <Picture src={cocteleria} formats={['avif', 'webp']}
+          fallbackFormat="jpg" widths={[800, 1448]} alt="" class="size-full object-cover" />
+    <div class="absolute inset-0 bg-gradient-to-r from-ink via-ink/95 to-ink/70"></div>
+  </div>
+
+  <div class="container-x relative grid gap-14 lg:grid-cols-[1fr_1.2fr] lg:gap-20">
+    <div>
+      <span class="eyebrow !text-mustard">Contacto</span>
+      <h2 class="mt-5 text-5xl leading-[1.02] font-medium sm:text-7xl">
+        Hablemos de tu <em class="text-blush italic">pared</em>
+      </h2>
+      <p class="mt-6 max-w-md text-lg leading-relaxed text-cream/75">
+        Cuéntame tu idea y envíame una foto del espacio. Te responderé con una propuesta y un presupuesto cerrado en menos
+        de 48 horas.
+      </p>
+
+      <ul class="mt-12 space-y-4">
+        <li>
+          <a href={wa} target="_blank" rel="noopener" class="group flex items-center gap-4">
+            <span class="grid size-12 place-items-center rounded-full bg-[#25D366] text-ink transition group-hover:scale-110">
+              <svg viewBox="0 0 24 24" class="size-6" fill="currentColor" aria-hidden="true"
+                ><path
+                  d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .3-3.3-.7-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.6-.4.8-.4h.6c.2 0 .4 0 .7.5l.9 2.2c.1.2.1.4 0 .6l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l2.1 1c.3.1.5.2.6.3.1.2.1.8-.2 1.5Z"
+                ></path></svg
+              >
+            </span>
+            <span>
+              <span class="block text-sm text-cream/60">WhatsApp</span>
+              <span class="block text-lg font-semibold">{site.phone}</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href={`mailto:${site.email}`} class="group flex items-center gap-4">
+            <span class="grid size-12 place-items-center rounded-full bg-cream text-ink transition group-hover:scale-110">
+              <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"
+                ><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg
+              >
+            </span>
+            <span>
+              <span class="block text-sm text-cream/60">Email</span>
+              <span class="block text-lg font-semibold">{site.email}</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href={site.instagram} target="_blank" rel="noopener" class="group flex items-center gap-4">
+            <span class="grid size-12 place-items-center rounded-full bg-gradient-to-tr from-mustard via-terracotta to-[#8a3ab9] text-cream transition group-hover:scale-110">
+              <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"
+                ><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle
+                  cx="17.5"
+                  cy="6.5"
+                  r=".5"
+                  fill="currentColor"></circle></svg
+              >
+            </span>
+            <span>
+              <span class="block text-sm text-cream/60">Instagram</span>
+              <span class="block text-lg font-semibold">@elmuralisto</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <form
+      id="contact-form"
+      name="contacto"
+      method="POST"
+      action="/gracias"
+      enctype="multipart/form-data"
+      data-netlify="true"
+      netlify-honeypot="empresa-web"
+      class="rounded-[2rem] bg-paper p-6 text-ink shadow-2xl sm:p-10"
+    >
+      <input type="hidden" name="form-name" value="contacto" />
+      <input type="hidden" name="estimacion" id="estimacion" />
+      <p class="hidden"><label>No rellenar: <input name="empresa-web" tabindex="-1" autocomplete="off" /></label></p>
+
+      <div hidden class="mb-6 rounded-2xl bg-terracotta/10 p-4 text-sm">
+        <p class="font-semibold text-terracotta">Tu estimación</p>
+        <p id="estimacion-nota" class="mt-1 text-ink-soft"></p>
+      </div>
+
+      <div class="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label for="nombre" class="label">Nombre</label>
+          <input id="nombre" name="nombre" required autocomplete="name" class="field" placeholder="Tu nombre" />
+        </div>
+        <div>
+          <label for="email" class="label">Email</label>
+          <input id="email" name="email" type="email" required autocomplete="email" class="field" placeholder="tu@email.com" />
+        </div>
+        <div>
+          <label for="telefono" class="label">Teléfono <span class="font-normal text-ink-soft">(opcional)</span></label>
+          <input id="telefono" name="telefono" type="tel" autocomplete="tel" class="field" placeholder="600 000 000" />
+        </div>
+        <div>
+          <label for="ciudad" class="label">Ciudad</label>
+          <input id="ciudad" name="ciudad" required autocomplete="address-level2" class="field" placeholder="¿Dónde está la pared?" />
+        </div>
+        <div>
+          <label for="tipo-espacio" class="label">Tipo de espacio</label>
+          <select id="tipo-espacio" name="tipo" class="field appearance-none">
+            <option value="hogar">Hogar</option>
+            <option value="comercio">Comercio</option>
+            <option value="otro">Otro / Fachada</option>
+          </select>
+        </div>
+        <div>
+          <label for="metros" class="label">Metros aprox. <span class="font-normal text-ink-soft">(m²)</span></label>
+          <input id="metros" name="metros" type="number" min="1" step="0.1" inputmode="decimal" class="field" placeholder="10" />
+        </div>
+        <div class="sm:col-span-2">
+          <label for="mensaje" class="label">Tu idea</label>
+          <textarea id="mensaje" name="mensaje" rows="4" required class="field resize-y" placeholder="Estilo, colores, qué quieres transmitir, fechas…"></textarea>
+        </div>
+        <div class="sm:col-span-2">
+          <label for="foto" class="label">Foto de la pared <span class="font-normal text-ink-soft">(opcional)</span></label>
+          <input
+            id="foto"
+            name="foto"
+            type="file"
+            accept="image/*"
+            class="field cursor-pointer file:mr-4 file:rounded-full file:border-0 file:bg-ink file:px-4 file:py-2 file:text-sm file:font-semibold file:text-cream"
+          />
+        </div>
+      </div>
+
+      <label class="mt-6 flex items-start gap-3 text-sm text-ink-soft">
+        <input type="checkbox" required class="mt-0.5 size-4 accent-terracotta" />
+        <span>Acepto que se usen mis datos para responder a esta solicitud.</span>
+      </label>
+
+      <button type="submit" class="btn-accent mt-8 w-full !py-4 text-base">
+        <span class="label-idle">Enviar solicitud</span>
+        <span class="label-busy hidden">Enviando…</span>
+      </button>
+      <p id="form-status" role="status" class="mt-4 text-center text-sm"></p>
+    </form>
+  </div>
+</section>
+
+<script>
+  function initContact() {
+    const form = document.getElementById('contact-form') as HTMLFormElement | null;
+    if (!form) return;
+    const status = document.getElementById('form-status')!;
+    const btn = form.querySelector('button[type=submit]') as HTMLButtonElement;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      btn.disabled = true;
+      btn.querySelector('.label-idle')!.classList.add('hidden');
+      btn.querySelector('.label-busy')!.classList.remove('hidden');
+      status.textContent = '';
+      try {
+        const res = await fetch('/', { method: 'POST', body: new FormData(form) });
+        if (!res.ok) throw new Error(String(res.status));
+        window.location.href = '/gracias';
+      } catch {
+        status.textContent = 'No se pudo enviar. Inténtalo de nuevo o escríbeme por WhatsApp.';
+        status.className = 'mt-4 text-center text-sm text-terracotta';
+        btn.disabled = false;
+        btn.querySelector('.label-idle')!.classList.remove('hidden');
+        btn.querySelector('.label-busy')!.classList.add('hidden');
+      }
+    });
+  }
+  document.addEventListener('astro:page-load', initContact);
+</script>

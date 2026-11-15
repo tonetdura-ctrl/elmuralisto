@@ -1,0 +1,69 @@
+---
+import { plans } from '../data/site';
+---
+
+<section id="servicios" class="relative bg-ink py-24 text-cream sm:py-32">
+  <div class="container-x">
+    <div class="grid gap-8 lg:grid-cols-2 lg:items-end">
+      <div>
+        <span class="eyebrow !text-mustard">Servicios y tarifas</span>
+        <h2 class="mt-5 text-4xl leading-tight font-medium sm:text-6xl">
+          Un mural para cada <em class="text-blush italic">pared</em>
+        </h2>
+      </div>
+      <p class="max-w-lg text-lg leading-relaxed text-cream/70 lg:justify-self-end">
+        Precios orientativos por metro cuadrado, con diseño incluido. Cada proyecto es único: te envío un presupuesto
+        cerrado y sin sorpresas tras ver tu pared.
+      </p>
+    </div>
+
+    <div class="mt-16 grid gap-5 lg:grid-cols-3">
+      {
+        plans.map((p) => (
+          <article
+            class:list={[
+              'reveal relative flex flex-col rounded-[2rem] p-8 sm:p-10',
+              p.featured ? 'bg-terracotta text-cream lg:-translate-y-4' : 'bg-cream/[0.06] ring-1 ring-cream/10',
+            ]}
+          >
+            {p.featured && (
+              <span class="absolute top-8 right-8 rounded-full bg-cream px-3 py-1 text-xs font-bold text-terracotta">
+                Más solicitado
+              </span>
+            )}
+            <h3 class="text-3xl font-medium">{p.name}</h3>
+            <p class:list={['mt-2 text-sm', p.featured ? 'text-cream/85' : 'text-cream/60']}>{p.for}</p>
+            <p class="mt-8 flex items-baseline gap-2">
+              {p.unit && <span class="text-sm opacity-70">desde</span>}
+              <span class="font-display text-6xl font-medium">{p.price}</span>
+              <span class="text-lg opacity-80">{p.unit}</span>
+            </p>
+            <ul class="mt-8 space-y-3.5 border-t border-current/15 pt-8 text-sm">
+              {p.features.map((f) => (
+                <li class="flex gap-3">
+                  <svg viewBox="0 0 20 20" class="mt-0.5 size-4 shrink-0" fill="currentColor" aria-hidden="true">
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0Z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  {f}
+                </li>
+              ))}
+            </ul>
+            <a
+              href="#presupuesto"
+              class:list={[
+                'btn mt-10',
+                p.featured ? 'bg-cream text-ink hover:bg-ink hover:text-cream' : 'bg-cream/10 text-cream hover:bg-cream hover:text-ink',
+              ]}
+            >
+              Calcular presupuesto
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
