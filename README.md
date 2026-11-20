@@ -5,7 +5,7 @@ Web para vender murales pintados a mano. Construida con:
 - **Astro 7**: sitio estático muy rápido, con View Transitions entre páginas
 - **Tailwind CSS 4**: diseño
 - **astro:assets + sharp**: las fotos se convierten a AVIF/WebP en varios tamaños (≈2 MB → 30–150 KB)
-- **Netlify Forms**: formulario de contacto con subida de foto, sin servidor propio
+- **Cloudflare Pages**: alojamiento gratuito en https://elmuralisto.es
 - SEO: Open Graph, datos estructurados (LocalBusiness + FAQ), sitemap y robots.txt
 - Animaciones con CSS nativo (scroll-driven) que respetan "reducir movimiento"
 
@@ -30,8 +30,11 @@ npm run dev      # http://localhost:4321
 npm run build    # genera dist/
 ```
 
-## Publicar en Netlify
+## Publicación
 
-Conecta el repositorio en Netlify con **Base directory** `el-muralisto`. El resto lo lee de `netlify.toml`.
-Los mensajes del formulario aparecen en Netlify → Forms (puedes activar avisos por email).
-Cuando tengas dominio, cámbialo en `astro.config.mjs` (`site`) y en `public/robots.txt`.
+La web está en **Cloudflare Pages** (proyecto `elmuralisto`), conectada a este repositorio.
+Cada cambio que se sube a `main` se publica solo en https://elmuralisto.es en uno o dos minutos.
+
+- Build command: `npm run build` · Output: `dist` · Variable `NODE_VERSION=22`
+- Las cabeceras de seguridad y caché están en `public/_headers`
+- El dominio está registrado en Hostinger y sus DNS los gestiona Cloudflare
