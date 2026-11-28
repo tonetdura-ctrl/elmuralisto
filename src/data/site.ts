@@ -18,10 +18,10 @@ export const site = {
   description:
     'El Muralisto diseña y pinta murales a mano para comercios, restaurantes y hogares. Diseño a medida, boceto digital previo y pintura profesional en tu pared.',
   // ⚠️ Sustituye por tus datos reales
-  email: 'hola@elmuralisto.com',
+  email: 'hola@elmuralisto.es', // reenvía a la bandeja privada (DNS: forwardemail.net)
   phone: '+34 600 000 000',
   whatsapp: '34600000000', // solo dígitos, con prefijo de país
-  instagram: 'https://instagram.com/elmuralisto',
+  instagram: 'https://www.instagram.com/elmuralisto/',
   city: 'España',
 };
 
